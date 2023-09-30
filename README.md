@@ -112,16 +112,21 @@ Registra un usuario, la aplicación debería estar corriendo correctamente.
 ## Preguntas
 
 1. Revisa el archivo `Dockerfile` en la carpeta `users-svc` y compáralo con el mismo archivo en la carpeta `ws-server`. ¿Qué te llama la atención? Ahora revisa la sentencia `command` para los respectivos servicios en el archivo `docker-compose.yml`. ¿Qué concluyes?
+Respuestas: ambos archivos, tanto el de users-svc como el de ws-server, contienen la misma información.
+La sentencia command, permitirá aplicar migraciones y mantener la estructura de la base de datos actualizada con la versión de la aplicación. La sentencia command, busca en un directorio los scripts de migración que no se hayan aplicado a la base de datos. Ejecutará los scripts en orden secuencial en la base de datos de destino, aplicando actualizaciones necesarias para el esquema de la base de datos este sincronizado con la version deseada. 
 
-2. Revisa el archivo `Dockerfile` en la carpeta `frontend`. ¿Qué te llama la atención? ¿En qué es diferente de los otros archivos `Dockerfile`?
+3. Revisa el archivo `Dockerfile` en la carpeta `frontend`. ¿Qué te llama la atención? ¿En qué es diferente de los otros archivos `Dockerfile`?
+Respuesta: este Dockerfile se utiliza para crear una imagen de contenedor Docker que contiene la aplicación Node.js construida y lista para ser utilizada por un servidor web Nginx. La primera etapa se encarga de construir la aplicación Node.js, y la segunda etapa prepara la imagen final que incluye tanto la aplicación Node.js como Nginx para utilizarla. Esto lo necesitamos para el entorno de desarrolo webcon el objetivo de  empaquetar aplicaciones web en contenedores para su implementación y ejecución en servidores.
 
-3. ¿Para qué sirve el servicio flyway? ¿Qué pasa al hacer `docker ps` con respecto a este servicio?
+5. ¿Para qué sirve el servicio flyway? ¿Qué pasa al hacer `docker ps` con respecto a este servicio?
+Respuesta:
+Flyway permite administrar la migración de nuestra base de datos. De esta forma podemos administrar  y aplicar cambios en el esquema de la base de datos de una manera coherente.
 
-4. ¿Cuantas imágenes se crean? ¿Cuántos contenedores están activos?
+6. ¿Cuantas imágenes se crean? ¿Cuántos contenedores están activos?
 
-5. Deten los contenedores con `docker-compose down`, luego reinicia con `docker-compose up -d`. Ingresa a la base de datos. ¿Qué pasa con los datos? 
+7. Deten los contenedores con `docker-compose down`, luego reinicia con `docker-compose up -d`. Ingresa a la base de datos. ¿Qué pasa con los datos? 
 
-6. Baja los contenedres. Crea un volumen para postgres agregando estas sentencias en el servicio `postgres`: 
+8. Baja los contenedres. Crea un volumen para postgres agregando estas sentencias en el servicio `postgres`: 
 
 ```
  volumes:
